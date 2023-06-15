@@ -5,7 +5,7 @@ import 'package:project_kelas/controller/c_user.dart';
 import 'package:project_kelas/event/event_pref.dart';
 import 'package:project_kelas/model/user.dart';
 import 'package:project_kelas/screen/admin/home_screen.dart';
-import 'package:project_kelas/screen/admin/profile_screen.dart';
+import 'package:project_kelas/screen/admin/profile.dart';
 import 'package:project_kelas/screen/admin/event_screen.dart';
 import 'package:intl/intl.dart';
 
@@ -22,7 +22,7 @@ class _DashboardAdminState extends State<DashboardAdmin> {
   List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
     CreateEventScreen(), // Changed the placeholder to "CreateEventScreen"
-    ProfileScreen(),
+    ProfilePage(),
   ];
 
   CUser _cUser = Get.put(CUser());
@@ -104,7 +104,7 @@ class _DashboardAdminState extends State<DashboardAdmin> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           CircleAvatar(
-                            child: Icon(Icons.settings),
+                             child: Image.asset('asset/images/teknokrat.png'),
                           )
                         ],
                       )
