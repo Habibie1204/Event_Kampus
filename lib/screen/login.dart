@@ -25,24 +25,70 @@ class _LoginState extends State<Login> {
         child: Column(
           children: [
             Container(
-              height: 250,
+              height: 500,
               decoration: BoxDecoration(
-                color: Asset.colorPrimaryDark,
-              ),
+                  gradient: LinearGradient(
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    colors: [
+                      Color.fromARGB(255, 68, 182, 231),
+                      Color.fromARGB(255, 3, 54, 131),
+                    ],
+                  ),
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(40),
+                      bottomRight: Radius.circular(40))),
               alignment: Alignment.bottomCenter,
-              padding: EdgeInsets.only(left: 20, bottom: 20),
+              padding: EdgeInsets.only(bottom: 20, top: 90),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'Produk Smart Campus',
+                    'PENTAS ISLAMI TEKNOKRAT',
                     style: TextStyle(
                         fontSize: 30,
                         color: Colors.white,
                         fontWeight: FontWeight.bold),
                   ),
+                  Container(
+                    margin: EdgeInsets.only(top: 30),
+                    width: 200,
+                    height: 200,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: FractionalTranslation(
+                        translation: Offset(0.0, -0.02),
+                        child: ClipOval(
+                          child: Image.network(
+                            'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/UNIVERSITASTEKNOKRAT.png/1200px-UNIVERSITASTEKNOKRAT.png',
+                            fit: BoxFit.cover,
+                            width: 170, // Atur lebar gambar
+                            height: 170,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  Text(
+                    "Universitas Teknokrat Indonesia",
+                    style: TextStyle(
+                        fontSize: 28,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  )
                 ],
               ),
+            ),
+            SizedBox(
+              height: 30,
             ),
             Form(
                 key: _formKey,
@@ -55,38 +101,38 @@ class _LoginState extends State<Login> {
                             value == '' ? 'Jangan Kosong' : null,
                         controller: _controllerUsername,
                         style: TextStyle(
-                          color: Asset.colorPrimaryDark,
+                          color: Color.fromARGB(255, 92, 92, 92),
                         ),
                         decoration: InputDecoration(
                             hintText: 'username',
                             hintStyle: TextStyle(
-                              color: Asset.colorPrimaryDark,
+                              color: Color.fromARGB(255, 92, 92, 92),
                             ),
                             filled: true,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide: BorderSide(
-                                color: Asset.colorPrimaryDark,
+                                color: Color.fromARGB(255, 92, 92, 92),
                                 width: 1,
                               ),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide: BorderSide(
-                                color: Asset.colorPrimary,
+                                color: Color.fromARGB(255, 92, 92, 92),
                                 width: 2,
                               ),
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide: BorderSide(
-                                color: Asset.colorPrimary,
+                                color: Color.fromARGB(255, 92, 92, 92),
                                 width: 1,
                               ),
                             ),
                             prefixIcon: Icon(
                               Icons.people,
-                              color: Asset.colorPrimaryDark,
+                              color: Color.fromARGB(255, 10, 102, 177),
                             )),
                       ),
                       SizedBox(
@@ -97,49 +143,58 @@ class _LoginState extends State<Login> {
                             value == '' ? 'Jangan Kosong' : null,
                         controller: _controllerPass,
                         style: TextStyle(
-                          color: Asset.colorPrimaryDark,
+                          color: Color.fromARGB(255, 92, 92, 92),
                         ),
                         obscureText: true,
                         decoration: InputDecoration(
                             hintText: '***********',
                             hintStyle: TextStyle(
-                              color: Asset.colorPrimaryDark,
+                              color: Color.fromARGB(255, 92, 92, 92),
                             ),
                             filled: true,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide: BorderSide(
-                                color: Asset.colorPrimaryDark,
+                                color: Color.fromARGB(255, 92, 92, 92),
                                 width: 1,
                               ),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide: BorderSide(
-                                color: Asset.colorPrimary,
+                                color: Color.fromARGB(255, 92, 92, 92),
                                 width: 2,
                               ),
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide: BorderSide(
-                                color: Asset.colorPrimary,
+                                color: Color.fromARGB(255, 92, 92, 92),
                                 width: 1,
                               ),
                             ),
                             prefixIcon: Icon(
                               Icons.vpn_key,
-                              color: Asset.colorPrimaryDark,
+                              color: Color.fromARGB(255, 10, 102, 177),
                             )),
                       ),
                       SizedBox(
-                        height: 15,
+                        height: 5,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          TextButton(
+                              onPressed: () {}, child: Text("Forget Password?"))
+                        ],
+                      ),
+                      SizedBox(
+                        height: 5,
                       ),
                       Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Asset.colorAccent,
-                        ),
+                            borderRadius: BorderRadius.circular(10),
+                            color: Color.fromARGB(255, 20, 118, 198)),
                         width: double.infinity,
                         child: InkWell(
                           onTap: () {
@@ -168,12 +223,22 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                       SizedBox(
-                        height: 8,
+                        height: 5,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("Don't Have Ant Account"),
+                          TextButton(onPressed: () {}, child: Text("Sign Up"))
+                        ],
+                      ),
+                      SizedBox(
+                        height: 25,
                       ),
                       Container(
                         margin: EdgeInsets.only(bottom: 8.0),
                         child: Text(
-                          'developed by kelompok n',
+                          'developed by kelompok 8',
                           style: TextStyle(
                             color: Colors.grey,
                             fontSize: 12.0,

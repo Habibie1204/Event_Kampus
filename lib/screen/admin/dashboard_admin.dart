@@ -5,6 +5,9 @@ import 'package:project_kelas/controller/c_user.dart';
 import 'package:project_kelas/event/event_pref.dart';
 import 'package:project_kelas/model/user.dart';
 import 'package:project_kelas/screen/admin/home_screen.dart';
+import 'package:project_kelas/screen/admin/profile_screen.dart';
+import 'package:project_kelas/screen/admin/event_screen.dart';
+import 'package:intl/intl.dart';
 
 class DashboardAdmin extends StatefulWidget {
   const DashboardAdmin({Key? key}) : super(key: key);
@@ -18,6 +21,8 @@ class _DashboardAdminState extends State<DashboardAdmin> {
   String _title = '';
   List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
+    CreateEventScreen(), // Changed the placeholder to "CreateEventScreen"
+    ProfileScreen(),
   ];
 
   CUser _cUser = Get.put(CUser());
@@ -51,6 +56,7 @@ class _DashboardAdminState extends State<DashboardAdmin> {
               ? Container(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Flexible(
                         flex: 1,
@@ -94,16 +100,14 @@ class _DashboardAdminState extends State<DashboardAdmin> {
                           ],
                         ),
                       ),
-                      CircleAvatar(
-                        radius: 30,
-                        backgroundColor: Asset.colorAccent,
-                        child: CircleAvatar(
-                          radius: 27,
-                          backgroundImage:
-                              AssetImage('asset/images/teknokrat.png'),
-                          backgroundColor: Asset.colorPrimaryDark,
-                        ),
-                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CircleAvatar(
+                            child: Icon(Icons.settings),
+                          )
+                        ],
+                      )
                     ],
                   ),
                 )
@@ -129,24 +133,20 @@ class _DashboardAdminState extends State<DashboardAdmin> {
           currentIndex: _selectedIndex,
           showSelectedLabels: true,
           showUnselectedLabels: true,
-          unselectedItemColor: Color.fromARGB(150, 255, 159, 159),
-          selectedItemColor: Asset.colorPrimary,
+          unselectedItemColor: Color.fromARGB(255, 139, 195, 241),
+          selectedItemColor: Colors.blue,
           items: [
             BottomNavigationBarItem(
               label: "Home",
               icon: Icon(Icons.home),
             ),
             BottomNavigationBarItem(
-              label: "navbar 1",
-              icon: Icon(Icons.explore),
+              label: "Daftar Lomba",
+              icon: Icon(Icons.event_note),
             ),
             BottomNavigationBarItem(
-              label: "navbar 2",
-              icon: Icon(Icons.bar_chart),
-            ),
-            BottomNavigationBarItem(
-              label: "navbar 3",
-              icon: Icon(Icons.calendar_today),
+              label: "Profile",
+              icon: Icon(Icons.person),
             ),
           ],
         ),
@@ -166,83 +166,15 @@ class _DashboardAdminState extends State<DashboardAdmin> {
           break;
         case 1:
           {
-            _title = 'navbar 1';
+            _title = 'Daftar Lomba';
           }
           break;
         case 2:
           {
-            _title = 'navbar 2';
-          }
-          break;
-        case 3:
-          {
-            _title = 'navbar 3';
+            _title = 'Profile';
           }
           break;
       }
     });
-  }
-}
-
-class IconButton extends StatelessWidget {
-  final String nameLabel;
-  final IconData iconLabel;
-
-  IconButton(this.nameLabel, this.iconLabel);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 5),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            // margin: EdgeInsets.only(bottom: 5),
-            child: Material(
-              borderRadius: BorderRadius.all(
-                Radius.circular(15),
-              ),
-              color: Colors.transparent,
-              child: InkWell(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(15),
-                ),
-                onTap: () {},
-                child: Container(
-                  // margin: EdgeInsets.all(5),
-                  height: 60,
-                  width: 60,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(15),
-                    ),
-                  ),
-                  child: Center(
-                    child: Stack(
-                      children: [
-                        Icon(
-                          iconLabel,
-                          color: Colors.white,
-                          size: 40,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 5, bottom: 5),
-            child: Text(
-              nameLabel,
-              style: TextStyle(fontSize: 14),
-            ),
-          )
-        ],
-      ),
-    );
   }
 }

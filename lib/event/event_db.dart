@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:project_kelas/config/api.dart';
 import 'package:project_kelas/event/event_pref.dart';
-import 'package:project_kelas/model/mahasiswa.dart';
+import 'package:project_kelas/model/panitia.dart';
 import 'package:project_kelas/model/user.dart';
 import 'package:http/http.dart' as http;
-import 'package:project_kelas/screen/admin/add_update_mahasiswa.dart';
+import 'package:project_kelas/screen/admin/add_update_panitia.dart';
 import 'package:project_kelas/screen/login.dart';
 import 'package:project_kelas/widget/info.dart';
 
@@ -143,19 +143,19 @@ class EventDb {
     }
   }
 
-  static Future<List<Mahasiswa>> getMahasiswa() async {
-    List<Mahasiswa> listMahasiswa = [];
+  static Future<List<Panitia>> getPanitia() async {
+    List<Panitia> listPanitia = [];
 
     try {
-      var response = await http.get(Uri.parse(Api.getMahasiswa));
+      var response = await http.get(Uri.parse(Api.getPanitia));
 
       if (response.statusCode == 200) {
         var responBody = jsonDecode(response.body);
         if (responBody['success']) {
-          var mahasiswa = responBody['mahasiswa'];
+          var panitia = responBody['panitia'];
 
-          mahasiswa.forEach((mahasiswa) {
-            listMahasiswa.add(Mahasiswa.fromJson(mahasiswa));
+          panitia.forEach((panitia) {
+            listPanitia.add(Panitia.fromJson(panitia));
           });
         }
       }
@@ -163,26 +163,32 @@ class EventDb {
       print(e);
     }
 
-    return listMahasiswa;
+    return listPanitia;
   }
 
-  static Future<String> AddMahasiswa(String mhsNpm, String mhsNama,
-      String mhsAlamat, String mhsFakultas, String MhsProdi) async {
+  static Future<String> AddPanitia(
+      String mhsNpm,
+      String mhsNama,
+      String mhsAlamat,
+      String mhsFakultas,
+      String MhsProdi,
+      String Pj_lomba) async {
     String reason;
 
     try {
-      var response = await http.post(Uri.parse(Api.addMahasiswa), body: {
+      var response = await http.post(Uri.parse(Api.addPanitia), body: {
         'mhsNpm': mhsNpm,
         'mhsNama': mhsNama,
         'mhsAlamat': mhsAlamat,
         'mhsFakultas': mhsFakultas,
         'MhsProdi': MhsProdi,
+        'Pj_lomba': Pj_lomba,
       });
 
       if (response.statusCode == 200) {
         var responBody = jsonDecode(response.body);
         if (responBody['success']) {
-          reason = 'Add Mahasiswa Berhasil';
+          reason = 'Add Panitia Berhasil';
         } else {
           reason = responBody['reason'];
         }
@@ -197,23 +203,29 @@ class EventDb {
     return reason;
   }
 
-  static Future<void> UpdateMahasiswa(String mhsNpm, String mhsNama,
-      String mhsAlamat, String mhsFakultas, String MhsProdi) async {
+  static Future<void> UpdatePanitia(
+      String mhsNpm,
+      String mhsNama,
+      String mhsAlamat,
+      String mhsFakultas,
+      String MhsProdi,
+      String Pj_lomba) async {
     try {
-      var response = await http.post(Uri.parse(Api.updateMahasiswa), body: {
+      var response = await http.post(Uri.parse(Api.updatePanitia), body: {
         'mhsNpm': mhsNpm,
         'mhsNama': mhsNama,
         'mhsAlamat': mhsAlamat,
         'mhsFakultas': mhsFakultas,
-        'MhsProdi': MhsProdi
+        'MhsProdi': MhsProdi,
+        'Pj_lomba': Pj_lomba
       });
 
       if (response.statusCode == 200) {
         var responBody = jsonDecode(response.body);
         if (responBody['success']) {
-          Info.snackbar('Berhasil Update Mahasiswa');
+          Info.snackbar('Berhasil Update Panitia');
         } else {
-          Info.snackbar('Gagal Update Mahasiswa');
+          Info.snackbar('Gagal Update Panitia');
         }
       }
     } catch (e) {
@@ -221,17 +233,17 @@ class EventDb {
     }
   }
 
-  static Future<void> deleteMahasiswa(String mhsNpm) async {
+  static Future<void> deletePanitia(String mhsNpm) async {
     try {
       var response = await http
-          .post(Uri.parse(Api.deleteMahasiswa), body: {'mhsNpm': mhsNpm});
+          .post(Uri.parse(Api.deletePanitia), body: {'mhsNpm': mhsNpm});
 
       if (response.statusCode == 200) {
         var responBody = jsonDecode(response.body);
         if (responBody['success']) {
-          Info.snackbar('Berhasil Delete Mahasiswa');
+          Info.snackbar('Berhasil Delete Panitia');
         } else {
-          Info.snackbar('Gagal Delete Mahasiswa');
+          Info.snackbar('Gagal Delete Panitia');
         }
       }
     } catch (e) {

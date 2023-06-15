@@ -7,6 +7,7 @@ import 'package:project_kelas/config/asset.dart';
 import 'package:project_kelas/event/event_db.dart';
 import 'package:project_kelas/screen/admin/list_user.dart';
 import 'package:project_kelas/widget/info.dart';
+import 'package:intl/intl.dart';
 
 import '../../model/user.dart';
 
@@ -25,14 +26,9 @@ class _AddUpdateUserState extends State<AddUpdateUser> {
   var _controllerUserName = TextEditingController();
   var _controllerPass = TextEditingController();
 
-  List<String> role = [
-    "Admin",
-    "Programmer",
-    "Direksi",
-    "Tester",
-  ];
+  List<String> role = ['admin', 'user'];
 
-  String _role = "Admin";
+  String _role = "admin";
 
   bool _isHidden = true;
   @override

@@ -1,24 +1,27 @@
-class Mahasiswa {
+class Panitia {
   String? mhsNpm;
   String? mhsNama;
   String? mhsAlamat;
   String? mhsFakultas;
   String? mhsProdi;
+  String? Pj_lomba;
 
-  Mahasiswa({
+  Panitia({
     this.mhsNpm,
     this.mhsNama,
     this.mhsAlamat,
     this.mhsFakultas,
     this.mhsProdi,
+    this.Pj_lomba,
   });
 
-  factory Mahasiswa.fromJson(Map<String, dynamic> json) => Mahasiswa(
+  factory Panitia.fromJson(Map<String, dynamic> json) => Panitia(
         mhsNpm: json['mhsNpm'],
         mhsNama: json['mhsNama'],
         mhsAlamat: json['mhsAlamat'],
         mhsFakultas: json['mhsFakultas'],
         mhsProdi: json['mhsProdi'],
+        Pj_lomba: json['pj_lomba'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -27,5 +30,6 @@ class Mahasiswa {
         'mhsAlamat': this.mhsAlamat,
         'mhsFakultas': this.mhsFakultas,
         'mhsProdi': this.mhsProdi,
+        'pj_lomba': this.Pj_lomba,
       };
 }

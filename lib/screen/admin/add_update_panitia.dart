@@ -5,37 +5,40 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 import 'package:project_kelas/config/asset.dart';
 import 'package:project_kelas/event/event_db.dart';
-import 'package:project_kelas/screen/admin/list_mahasiswa.dart';
+import 'package:project_kelas/screen/admin/add_update_panitia.dart';
+import 'package:project_kelas/screen/admin/list_panitia.dart';
 import 'package:project_kelas/widget/info.dart';
 
-import '../../model/mahasiswa.dart';
+import '../../model/panitia.dart';
 
-class AddUpdateMahasiswa extends StatefulWidget {
-  final Mahasiswa? mahasiswa;
-  AddUpdateMahasiswa({this.mahasiswa});
+class AddUpdatePanitia extends StatefulWidget {
+  final Panitia? panitia;
+  AddUpdatePanitia({this.panitia});
 
   @override
-  State<AddUpdateMahasiswa> createState() => _AddUpdateMahasiswaState();
+  State<AddUpdatePanitia> createState() => _AddUpdatePanitiaState();
 }
 
-class _AddUpdateMahasiswaState extends State<AddUpdateMahasiswa> {
+class _AddUpdatePanitiaState extends State<AddUpdatePanitia> {
   var _formKey = GlobalKey<FormState>();
   var _controllerNpm = TextEditingController();
   var _controllerNama = TextEditingController();
   var _controllerAlamat = TextEditingController();
   var _controllerFakultas = TextEditingController();
   var _controllerProdi = TextEditingController();
+  var _controllerPj_lomba = TextEditingController();
 
   bool _isHidden = true;
   @override
   void initState() {
     // TODO: implement initState
-    if (widget.mahasiswa != null) {
-      _controllerNpm.text = widget.mahasiswa!.mhsNpm!;
-      _controllerNama.text = widget.mahasiswa!.mhsNama!;
-      _controllerAlamat.text = widget.mahasiswa!.mhsAlamat!;
-      _controllerFakultas.text = widget.mahasiswa!.mhsFakultas!;
-      _controllerProdi.text = widget.mahasiswa!.mhsProdi!;
+    if (widget.panitia != null) {
+      _controllerNpm.text = widget.panitia!.mhsNpm!;
+      _controllerNama.text = widget.panitia!.mhsNama!;
+      _controllerAlamat.text = widget.panitia!.mhsAlamat!;
+      _controllerFakultas.text = widget.panitia!.mhsFakultas!;
+      _controllerProdi.text = widget.panitia!.mhsProdi!;
+      _controllerPj_lomba.text = widget.panitia!.Pj_lomba!;
     }
     super.initState();
   }
@@ -45,9 +48,9 @@ class _AddUpdateMahasiswaState extends State<AddUpdateMahasiswa> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         // titleSpacing: 0,
-        title: widget.mahasiswa != null
-            ? Text('Update Mahasiswa')
-            : Text('Tambah Mahasiswa'),
+        title: widget.panitia != null
+            ? Text('Update Panitia')
+            : Text('Tambah Panitia'),
         backgroundColor: Asset.colorPrimary,
       ),
       body: Stack(
@@ -58,7 +61,7 @@ class _AddUpdateMahasiswaState extends State<AddUpdateMahasiswa> {
               padding: EdgeInsets.all(16),
               children: [
                 TextFormField(
-                  enabled: widget.mahasiswa == null ? true : false,
+                  enabled: widget.panitia == null ? true : false,
                   validator: (value) => value == '' ? 'Jangan Kosong' : null,
                   controller: _controllerNpm,
                   decoration: InputDecoration(
@@ -113,17 +116,28 @@ class _AddUpdateMahasiswaState extends State<AddUpdateMahasiswa> {
                 SizedBox(
                   height: 10,
                 ),
+                TextFormField(
+                  validator: (value) => value == '' ? 'Jangan Kosong' : null,
+                  controller: _controllerPj_lomba,
+                  decoration: InputDecoration(
+                      labelText: "Pj Lomba",
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10))),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
                 ElevatedButton(
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      if (widget.mahasiswa == null) {
-                        String message = await EventDb.AddMahasiswa(
-                          _controllerNpm.text,
-                          _controllerNama.text,
-                          _controllerAlamat.text,
-                          _controllerFakultas.text,
-                          _controllerProdi.text,
-                        );
+                      if (widget.panitia == null) {
+                        String message = await EventDb.AddPanitia(
+                            _controllerNpm.text,
+                            _controllerNama.text,
+                            _controllerAlamat.text,
+                            _controllerFakultas.text,
+                            _controllerProdi.text,
+                            _controllerPj_lomba.text);
                         Info.snackbar(message);
                         if (message.contains('Berhasil')) {
                           _controllerNpm.clear();
@@ -131,23 +145,24 @@ class _AddUpdateMahasiswaState extends State<AddUpdateMahasiswa> {
                           _controllerAlamat.clear();
                           _controllerFakultas.clear();
                           _controllerProdi.clear();
+                          _controllerPj_lomba.clear();
                           Get.off(
-                            ListMahasiswa(),
+                            ListPanitia(),
                           );
                         }
                       } else {
-                        EventDb.UpdateMahasiswa(
-                          _controllerNpm.text,
-                          _controllerNama.text,
-                          _controllerAlamat.text,
-                          _controllerFakultas.text,
-                          _controllerProdi.text,
-                        );
+                        EventDb.UpdatePanitia(
+                            _controllerNpm.text,
+                            _controllerNama.text,
+                            _controllerAlamat.text,
+                            _controllerFakultas.text,
+                            _controllerProdi.text,
+                            _controllerPj_lomba.text);
                       }
                     }
                   },
                   child: Text(
-                    widget.mahasiswa == null ? 'Simpan' : 'Ubah',
+                    widget.panitia == null ? 'Simpan' : 'Ubah',
                     style: TextStyle(fontSize: 16),
                   ),
                   style: ElevatedButton.styleFrom(

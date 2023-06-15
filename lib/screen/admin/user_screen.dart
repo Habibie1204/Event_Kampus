@@ -76,10 +76,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    IconButton('User', Icons.person, 0),
-                    IconButton('Peserta', Icons.people, 0),
-                    IconButton('Panitia', Icons.people_alt_outlined, 1),
-                    IconButton('lomba', Icons.event_note, 0),
+                    IconButton('Notifikasi Pemenang',
+                        Icons.notification_add_outlined, 0),
+                    IconButton('Daftar Lomba',
+                        Icons.picture_in_picture_alt_outlined, 1),
                     IconButton('logout', Icons.logout_outlined, 99),
                   ],
                 ),
@@ -127,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   margin: EdgeInsets.all(8),
                   clipBehavior: Clip.antiAlias, // Atur properti clipBehavior
                   child: Image.network(
-                    'https://kepanitiaan.teknokrat.ac.id/wp-content/uploads/2020/05/88057df9-aced-449a-af3b-132da25d03f8-1024x766.jpg',
+                    'https://kemahasiswaan.teknokrat.ac.id/wp-content/uploads/2020/05/88057df9-aced-449a-af3b-132da25d03f8-1024x766.jpg',
                     fit: BoxFit.contain,
                   ),
                 ),
@@ -213,7 +213,7 @@ class IconButton extends StatelessWidget {
 
   List<Map> _fragment = [
     {'title': 'Daftar User', 'view': ListUser()},
-    {'title': 'Daftar Panitia', 'view': ListPanitia()},
+    {'title': 'Daftar Mahasiswa', 'view': ListPanitia()},
   ];
 
   @override
