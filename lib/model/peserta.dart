@@ -1,35 +1,31 @@
-class Panitia {
-  String? mhsNpm;
-  String? mhsNama;
-  String? mhsAlamat;
-  String? mhsFakultas;
-  String? mhsProdi;
-  String? Pj_lomba;
+class Peserta {
+  String? nama;
+  String? email;
+  String? asal_sekolah;
+  String? daftar_lomba;
+  String? gender;
 
-  Panitia({
-    this.mhsNpm,
-    this.mhsNama,
-    this.mhsAlamat,
-    this.mhsFakultas,
-    this.mhsProdi,
-    this.Pj_lomba,
+  Peserta({
+    this.nama,
+    this.email,
+    this.asal_sekolah,
+    this.daftar_lomba,
+    this.gender,
   });
 
-  factory Panitia.fromJson(Map<String, dynamic> json) => Panitia(
-        mhsNpm: json['mhsNpm'],
-        mhsNama: json['mhsNama'],
-        mhsAlamat: json['mhsAlamat'],
-        mhsFakultas: json['mhsFakultas'],
-        mhsProdi: json['mhsProdi'],
-        Pj_lomba: json['pj_lomba'],
+  factory Peserta.fromJson(Map<String, dynamic> json) => Peserta(
+        nama: json['nama'],
+        email: json['email'],
+        asal_sekolah: json['asal sekolah'],
+        daftar_lomba: json['daftar lomba'],
+        gender: json['gender'],
       );
 
   Map<String, dynamic> toJson() => {
-        'mhsNpm': this.mhsNpm,
-        'mhsNama': this.mhsNama,
-        'mhsAlamat': this.mhsAlamat,
-        'mhsFakultas': this.mhsFakultas,
-        'mhsProdi': this.mhsProdi,
-        'pj_lomba': this.Pj_lomba,
+        'nama': this.nama,
+        'email': this.email,
+        'asal_sekolah': this.asal_sekolah,
+        'daftar_lomba': this.daftar_lomba,
+        'gender': this.gender,
       };
 }

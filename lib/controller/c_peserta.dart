@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
-import 'package:project_kelas/model/panitia.dart';
+import 'package:project_kelas/model/peserta.dart';
 
-class CPanitia extends GetxController {
-  Rx<Panitia> _panitia = Panitia().obs;
+class CPeserta extends GetxController {
+  Rx<Peserta> _peserta = Peserta().obs;
 
-  Panitia get user => _panitia.value;
+  Peserta get user => _peserta.value;
 
-  void setUser(Panitia dataPanitia) => _panitia.value = dataPanitia;
+  void setUser(Peserta dataPeserta) => _peserta.value = dataPeserta;
 }

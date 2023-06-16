@@ -1,8 +1,9 @@
 class Api {
-  static const _host = "http://192.168.43.175/api_kelas";
+  static const _host = "http://192.168.43.181:8080/api_kelas";
 
   static String _user = "$_host/user";
   static String _panitia = "$_host/panitia";
+  static String _peserta = "$_host/peserta";
 
   static String login = "$_host/login.php";
 
@@ -18,9 +19,9 @@ class Api {
   static String getPanitia = "$_panitia/get_panitia.php";
   static String updatePanitia = "$_panitia/update_panitia.php";
 
-  // panitia
-  static String addPeserta = "$_panitia/add_panitia.php";
-  static String deletePeserta = "$_panitia/delete_panitia.php";
-  static String getPeserta = "$_panitia/get_panitia.php";
-  static String updatePeserta = "$_panitia/update_panitia.php";
+  // peserta
+  static String addPeserta = "$_peserta/add_peserta.php";
+  static String deletePeserta = "$_peserta/delete_peserta.php";
+  static String getPeserta = "$_peserta/get_peserta.php";
+  static String updatePeserta = "$_peserta/add_update_peserta.php";
 }

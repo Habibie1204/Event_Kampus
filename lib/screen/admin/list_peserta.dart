@@ -2,29 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project_kelas/config/asset.dart';
 import 'package:project_kelas/event/event_db.dart';
-import 'package:project_kelas/model/panitia.dart';
-import 'package:project_kelas/screen/admin/add_update_panitia.dart';
+import 'package:project_kelas/model/peserta.dart';
+// import 'package:project_kelas/screen/admin/add_update_panitia.dart';
 
-class ListPanitia extends StatefulWidget {
+class ListPeserta extends StatefulWidget {
   @override
-  State<ListPanitia> createState() => _ListPanitiaState();
+  State<ListPeserta> createState() => _ListPesertaState();
 }
 
-class _ListPanitiaState extends State<ListPanitia> {
-  List<Panitia> _listPanitia = [];
+class _ListPesertaState extends State<ListPeserta> {
+  List<Peserta> _listPeserta = [];
 
-  void getPanitia() async {
-    _listPanitia = await EventDb.getPanitia();
+  void getPeserta() async {
+    _listPeserta = await EventDb.getPeserta();
     setState(() {});
   }
 
   @override
   void initState() {
-    getPanitia();
+    getPeserta();
     super.initState();
   }
 
-  void showOption(Panitia? panitia) async {
+  void showOption(Peserta? peserta) async {
     var result = await Get.dialog(
       AlertDialog(
         title: Text('Options'),
@@ -52,29 +52,29 @@ class _ListPanitiaState extends State<ListPanitia> {
       barrierDismissible: false,
     );
 
-    switch (result) {
-      case 'update':
-        Get.to(AddUpdatePanitia(panitia: panitia))
-            ?.then((value) => getPanitia());
-        break;
-      case 'delete':
-        EventDb.deletePanitia(panitia!.mhsNpm!).then((value) => getPanitia());
-        break;
-    }
+    // switch (result) {
+    //   case 'update':
+    //     Get.to(AddUpdatePeserta(panitia: panitia))
+    //         ?.then((value) => getPeserta());
+    //     break;
+    //   case 'delete':
+    //     EventDb.deletePeserta(panitia!.mhsNpm!).then((value) => getPeserta());
+    //     break;
+    // }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('List Panitia'),
+        title: Text('List Peserta'),
         backgroundColor: Asset.colorPrimary,
       ),
-      body: _listPanitia.length > 0
+      body: _listPeserta.length > 0
           ? ListView.builder(
-              itemCount: _listPanitia.length,
+              itemCount: _listPeserta.length,
               itemBuilder: (context, index) {
-                Panitia panitia = _listPanitia[index];
+                Peserta peserta = _listPeserta[index];
                 return Card(
                   elevation: 2,
                   margin: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
@@ -83,17 +83,18 @@ class _ListPanitiaState extends State<ListPanitia> {
                       child: Text('${index + 1}'),
                       backgroundColor: Colors.white,
                     ),
-                    title: Text(panitia.mhsNama ?? ''),
+                    title: Text(peserta.nama ?? ''),
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(panitia.mhsNpm ?? ''),
-                        Text(panitia.Pj_lomba ??
-                            ''), // Menampilkan field panitia
+                        Text(peserta.email ?? ''),
+                        Text(peserta.asal_sekolah ??''), 
+                        Text(peserta.daftar_lomba ??''),
+                        Text(peserta.gender ??''),
                       ],
                     ),
                     trailing: IconButton(
-                      onPressed: () => showOption(panitia),
+                      onPressed: () => showOption(peserta),
                       icon: Icon(Icons.more_vert),
                     ),
                   ),
@@ -103,12 +104,12 @@ class _ListPanitiaState extends State<ListPanitia> {
           : Center(
               child: Text("Data Kosong"),
             ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () =>
-            Get.to(AddUpdatePanitia())?.then((value) => getPanitia()),
-        child: Icon(Icons.add),
-        backgroundColor: Asset.colorAccent,
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () =>
+      //       Get.to(AddUpdatePeserta())?.then((value) => getPeserta()),
+      //   child: Icon(Icons.add),
+      //   backgroundColor: Asset.colorAccent,
+      // ),
     );
   }
 }

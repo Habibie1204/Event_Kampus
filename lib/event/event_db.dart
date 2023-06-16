@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:project_kelas/config/api.dart';
 import 'package:project_kelas/event/event_pref.dart';
 import 'package:project_kelas/model/panitia.dart';
+import 'package:project_kelas/model/peserta.dart';
 import 'package:project_kelas/model/user.dart';
 import 'package:http/http.dart' as http;
 import 'package:project_kelas/screen/admin/add_update_panitia.dart';
@@ -249,5 +250,28 @@ class EventDb {
     } catch (e) {
       print(e);
     }
+  }
+
+  static Future<List<Peserta>> getPeserta() async {
+    List<Peserta> listPeserta = [];
+
+    try {
+      var response = await http.get(Uri.parse(Api.getPeserta));
+
+      if (response.statusCode == 200) {
+        var responBody = jsonDecode(response.body);
+        if (responBody['success']) {
+          var peserta = responBody['peserta'];
+
+          peserta.forEach((peserta) {
+            listPeserta.add(Peserta.fromJson(peserta));
+          });
+        }
+      }
+    } catch (e) {
+      print(e);
+    }
+
+    return listPeserta;
   }
 }

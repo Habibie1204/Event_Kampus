@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project_kelas/config/asset.dart';
 import 'package:project_kelas/event/event_pref.dart';
-import 'package:project_kelas/screen/admin/list_panitia.dart';
 import 'package:project_kelas/screen/admin/list_user.dart';
+import 'package:project_kelas/screen/admin/list_panitia.dart';
+import 'package:project_kelas/screen/admin/list_peserta.dart';
 import 'package:project_kelas/screen/login.dart';
 import 'package:intl/intl.dart';
 
@@ -77,8 +78,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     IconButton('User', Icons.person, 0),
-                    IconButton('Peserta', Icons.people, 0),
-                    IconButton('Panitia', Icons.people_alt_outlined, 1),
+                    IconButton('Peserta', Icons.people, 1),
+                    IconButton('Panitia', Icons.people_alt_outlined, 2),
                     IconButton('lomba', Icons.event_note, 0),
                     IconButton('logout', Icons.logout_outlined, 99),
                   ],
@@ -127,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   margin: EdgeInsets.all(8),
                   clipBehavior: Clip.antiAlias, // Atur properti clipBehavior
                   child: Image.network(
-                    'https://kepanitiaan.teknokrat.ac.id/wp-content/uploads/2020/05/88057df9-aced-449a-af3b-132da25d03f8-1024x766.jpg',
+                    'https://iticm.ac.id/wp-content/uploads/2023/01/WhatsApp-Image-2023-01-12-at-16.57.31.jpeg',
                     fit: BoxFit.contain,
                   ),
                 ),
@@ -213,7 +214,9 @@ class IconButton extends StatelessWidget {
 
   List<Map> _fragment = [
     {'title': 'Daftar User', 'view': ListUser()},
+    {'title': 'Daftar Peserta', 'view': ListPeserta()},
     {'title': 'Daftar Panitia', 'view': ListPanitia()},
+    // {'title': 'Daftar Panitia', 'view': ListPanitia()},
   ];
 
   @override
