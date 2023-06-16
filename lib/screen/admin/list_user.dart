@@ -7,6 +7,7 @@ import 'package:project_kelas/screen/admin/add_update_user.dart';
 
 import '../../model/user.dart';
 
+//p
 class ListUser extends StatefulWidget {
   @override
   State<ListUser> createState() => _ListUserState();
@@ -16,15 +17,14 @@ class _ListUserState extends State<ListUser> {
   List<User> _listUser = [];
 
   void getUser() async {
-    _listUser = await EventDb.getUser();
-
     setState(() {});
+    _listUser = await EventDb.getUser();
   }
 
   @override
   void initState() {
-    getUser();
     super.initState();
+    getUser();
   }
 
   void showOption(User? user) async {
