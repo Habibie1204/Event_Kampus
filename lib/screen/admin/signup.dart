@@ -8,25 +8,27 @@ import 'package:project_kelas/event/event_db.dart';
 import 'package:http/http.dart' as http;
 import 'package:async/async.dart';
 import 'dart:convert';
-import 'package:project_kelas/screen/admin/home_screen.dart';
-import 'package:project_kelas/screen/admin/signup.dart';
+import 'package:project_kelas/screen/login.dart';
 
-class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+import 'package:project_kelas/screen/admin/home_screen.dart';
+
+class SignUp extends StatefulWidget {
+  const SignUp({Key? key}) : super(key: key);
 
   @override
-  State<Login> createState() => _LoginState();
+  State<SignUp> createState() => _LoginState();
 }
 
-class _LoginState extends State<Login> {
+class _LoginState extends State<SignUp> {
+  var _controllernama = TextEditingController();
   var _controllerUsername = TextEditingController();
   var _controllerPass = TextEditingController();
   var _formKey = GlobalKey<FormState>();
 
-  void login() async {
-    // Mengirim HTTP GET request ke URL tertentu
-    final url = Uri.parse('http://192.168.43.181:8080/api_kelas/login.php');
+  void signUp() async {
+    final url = Uri.parse('http://192.168.43.181:8080/api_kelas/signUp.php');
     final body = {
+     'nama': _controllernama.text,
       'username': _controllerUsername.text,
       'pass': _controllerPass.text
     };
@@ -37,9 +39,12 @@ class _LoginState extends State<Login> {
       );
       final data = jsonDecode(response.body);
       if (data['success'] == true) {
-        Navigator.pushReplacementNamed(context, '/dashboard');
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => HomeScreen()),
+        );
       } else {
-        print('username atau password salah');
+        print('Gagal mendaftar');
       }
     } catch (error) {
       print(error);
@@ -49,6 +54,7 @@ class _LoginState extends State<Login> {
   @override
   void initState() {
     super.initState();
+    _controllernama.clear();
     _controllerUsername.clear();
     _controllerPass.clear();
   }
@@ -60,7 +66,7 @@ class _LoginState extends State<Login> {
         child: Column(
           children: [
             Container(
-              height: 500,
+              height: 420,
               decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topRight,
@@ -74,7 +80,7 @@ class _LoginState extends State<Login> {
                       bottomLeft: Radius.circular(40),
                       bottomRight: Radius.circular(40))),
               alignment: Alignment.bottomCenter,
-              padding: EdgeInsets.only(bottom: 20, top: 90),
+              padding: EdgeInsets.only(bottom: 20, top: 75),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -94,17 +100,23 @@ class _LoginState extends State<Login> {
                       color: Colors.white,
                       shape: BoxShape.circle,
                     ),
-                    child: ClipOval(
-                      child: Image.network(
-                        'https://static.vecteezy.com/system/resources/previews/011/414/253/original/elegant-arabian-banner-with-white-background-and-mosque-free-vector.jpg',
-                        fit: BoxFit.cover,
-                        width: 200,
-                        height: 200,
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: FractionalTranslation(
+                        translation: Offset(0.0, -0.02),
+                        child: ClipOval(
+                          child: Image.network(
+                            'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/UNIVERSITASTEKNOKRAT.png/1200px-UNIVERSITASTEKNOKRAT.png',
+                            fit: BoxFit.cover,
+                            width: 170, // Atur lebar gambar
+                            height: 170,
+                          ),
+                        ),
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: 25,
+                    height: 20,
                   ),
                   Text(
                     "Universitas Teknokrat Indonesia",
@@ -122,9 +134,49 @@ class _LoginState extends State<Login> {
             Form(
                 key: _formKey,
                 child: Padding(
-                  padding: EdgeInsets.all(20),
+                  padding: EdgeInsets.fromLTRB(20, 5, 20, 20),
                   child: Column(
                     children: [
+                       TextFormField(
+                        validator: (value) =>
+                            value == '' ? 'Jangan Kosong' : null,
+                        controller: _controllernama,
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 92, 92, 92),
+                        ),
+                        decoration: InputDecoration(
+                            hintText: 'Nama',
+                            hintStyle: TextStyle(
+                              color: Color.fromARGB(255, 92, 92, 92),
+                            ),
+                            filled: true,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                color: Color.fromARGB(255, 92, 92, 92),
+                                width: 1,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                color: Color.fromARGB(255, 92, 92, 92),
+                                width: 2,
+                              ),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                color: Color.fromARGB(255, 92, 92, 92),
+                                width: 1,
+                              ),
+                            ),
+                            prefixIcon: Icon(
+                              Icons.person,
+                              color: Color.fromARGB(255, 10, 102, 177),
+                            )),
+                      ),
+                      SizedBox(height: 15),
                       TextFormField(
                         validator: (value) =>
                             value == '' ? 'Jangan Kosong' : null,
@@ -228,7 +280,7 @@ class _LoginState extends State<Login> {
                         child: InkWell(
                           onTap: () {
                             if (_formKey.currentState!.validate()) {
-                              EventDb.login(_controllerUsername.text,
+                              EventDb.register(_controllerUsername.text,
                                   _controllerPass.text);
                               _controllerUsername.clear();
                               _controllerPass.clear();
@@ -242,13 +294,13 @@ class _LoginState extends State<Login> {
                             ),
                             child: TextButton(
                               onPressed: () {
-                                login();
+                                signUp();
                                 _controllerUsername.clear();
                                 _controllerPass.clear();
                                 print("kepencet");
                               },
                               child: Text(
-                                'LOGIN',
+                                'SIGN UP',
                                 style: TextStyle(
                                   fontSize: 18,
                                   color: Colors.white,
@@ -265,13 +317,13 @@ class _LoginState extends State<Login> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("Don't Have Ant Account"),
+                          Text("Have An Account?"),
                           TextButton(
                             onPressed: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => SignUp()),
+                                    builder: (context) => Login()),
                               );
                             },
                             child: Text("Sign Up"),

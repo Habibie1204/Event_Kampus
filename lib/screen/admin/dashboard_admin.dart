@@ -104,7 +104,7 @@ class _DashboardAdminState extends State<DashboardAdmin> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           CircleAvatar(
-                            child: Icon(Icons.settings),
+                            child: Image.asset('asset/images/teknokrat.png'),
                           )
                         ],
                       )

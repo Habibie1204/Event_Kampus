@@ -7,6 +7,7 @@ import 'package:project_kelas/model/peserta.dart';
 import 'package:project_kelas/model/user.dart';
 import 'package:http/http.dart' as http;
 import 'package:project_kelas/screen/admin/add_update_panitia.dart';
+import 'package:project_kelas/screen/admin/signup.dart';
 import 'package:project_kelas/screen/login.dart';
 import 'package:project_kelas/widget/info.dart';
 
@@ -43,6 +44,39 @@ class EventDb {
     }
     return user;
   }
+static Future<User?> register(String username, String pass) async {
+  User? user;
+
+  try {
+    var response = await http.post(Uri.parse(Api.signup), body: {
+      'username': username,
+      'pass': pass,
+    });
+
+    if (response.statusCode == 200) {
+      var responseBody = jsonDecode(response.body);
+
+      if (responseBody['success']) {
+        user = User.fromJson(responseBody['user']);
+        EventPref.saveUser(user);
+        Info.snackbar('Registrasi Berhasil');
+        Future.delayed(Duration(milliseconds: 1700), () {
+          Get.off(SignUp());
+        });
+      } else {
+        Info.snackbar('Registrasi Gagal');
+      }
+    } else {
+      Info.snackbar('Request Registrasi Gagal');
+    }
+  } catch (e) {
+    print(e);
+  }
+  return user;
+}
+
+
+  
 
   static Future<List<User>> getUser() async {
     List<User> listUser = [];

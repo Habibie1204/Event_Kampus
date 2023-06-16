@@ -4,6 +4,7 @@ import 'package:project_kelas/config/asset.dart';
 import 'package:project_kelas/model/user.dart';
 import 'package:project_kelas/screen/admin/dashboard_admin.dart';
 import 'package:project_kelas/screen/admin/home_screen.dart';
+import 'package:project_kelas/screen/admin/signup.dart';
 
 import 'screen/login.dart';
 
@@ -22,10 +23,12 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: '/dashboard',
+      initialRoute: '/',
       routes: {
         '/': (context) => Login(),
         '/dashboard': (context) => DashboardAdmin(),
+        '/signup': (context) => SignUp(),
+
         // '/signup' : (context) => signup(),
       },
     );

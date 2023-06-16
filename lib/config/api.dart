@@ -6,6 +6,8 @@ class Api {
   static String _peserta = "$_host/peserta";
 
   static String login = "$_host/login.php";
+  static String signup = "$_host/register.php";
+
 
   // user
   static String addUser = "$_user/add_user.php";
