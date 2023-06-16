@@ -5,6 +5,11 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter/widgets.dart';
 import 'package:project_kelas/config/asset.dart';
 import 'package:project_kelas/event/event_db.dart';
+import 'package:http/http.dart' as http;
+import 'package:async/async.dart';
+import 'dart:convert';
+
+import 'package:project_kelas/screen/admin/home_screen.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -17,6 +22,37 @@ class _LoginState extends State<Login> {
   var _controllerUsername = TextEditingController();
   var _controllerPass = TextEditingController();
   var _formKey = GlobalKey<FormState>();
+
+  void login() async {
+    // Mengirim HTTP GET request ke URL tertentu
+    final url = Uri.parse('http://192.168.43.181:8080/api_kelas/login.php');
+    final body = {
+      'username': _controllerUsername.text,
+      'pass': _controllerPass.text
+    };
+    try {
+      final response = await http.post(
+        url,
+        body: body,
+      );
+      final data = jsonDecode(response.body);
+      if (data['success'] == true) {
+        Navigator.pushReplacementNamed(context, '/dashboard');
+
+      } else {
+        print('username atau password salah');
+      }
+    } catch (error) {
+      print(error);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _controllerUsername.clear();
+    _controllerPass.clear();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -211,13 +247,21 @@ class _LoginState extends State<Login> {
                               horizontal: 30,
                               vertical: 12,
                             ),
-                            child: Text(
-                              'LOGIN',
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
+                            child: TextButton(
+                              onPressed: () {
+                                login();
+                                _controllerUsername.clear();
+                                _controllerPass.clear();
+                                print("kepencet");
+                              },
+                              child: Text(
+                                'LOGIN',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.white,
+                                ),
+                                textAlign: TextAlign.center,
                               ),
-                              textAlign: TextAlign.center,
                             ),
                           ),
                         ),
