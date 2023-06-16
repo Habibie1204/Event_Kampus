@@ -8,6 +8,7 @@ import 'package:project_kelas/screen/admin/list_panitia.dart';
 import 'package:project_kelas/screen/admin/list_user.dart';
 import 'package:project_kelas/screen/login.dart';
 import 'package:project_kelas/screen/admin/profile_screen.dart';
+import 'package:file_picker/file_picker.dart';
 
 import 'package:flutter/material.dart';
 
@@ -49,16 +50,26 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+    return Scaffold(
+      appBar: AppBar(
+         leading: IconButton(
+             icon: Icon(Icons.arrow_back),
+         onPressed: () {
+          Navigator.pop(context); // Kembali ke halaman sebelumnya
+          },
+         ),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
             Text(
               'Profile',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
+             
             SizedBox(height: 16),
             TextFormField(
               controller: nameController,
@@ -98,12 +109,34 @@ class ProfileScreen extends StatelessWidget {
                 selectedGender = value;
               },
             ),
-            SizedBox(height: 16),
+             SizedBox(height: 16),
+           Row(
+            children: [
             ElevatedButton(
               onPressed: saveProfile,
               child: Text('Simpan'),
             ),
-          ],
+             SizedBox(width: 16),
+            ElevatedButton(
+  onPressed: () async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.image,
+    );
+    if (result != null) {
+      PlatformFile file = result.files.first;
+      // Lakukan sesuatu dengan file yang dipilih
+      // Misalnya, tampilkan nama file yang dipilih
+      print(file.name);
+    }
+  },
+  child: Text('Choose File'),
+),
+
+            ],
+           )
+           
+            ],
+          ),
         ),
       ),
     );

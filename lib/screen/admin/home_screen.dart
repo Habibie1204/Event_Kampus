@@ -8,6 +8,7 @@ import 'package:project_kelas/screen/admin/list_panitia.dart';
 import 'package:project_kelas/screen/admin/list_user.dart';
 import 'package:project_kelas/screen/login.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter/services.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -16,7 +17,18 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
+Future<void> loadFont() async {
+  await rootBundle.loadString(
+      'https://fonts.googleapis.com/css2?family=FontName&display=swap');
+}
+
 class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    loadFont();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -26,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(height: 16.0),
           Text(
             'Welcome to Pentas Islami Teknokrat',
-            style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+            style: TextStyle( fontSize: 24.0, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 16.0),
           Text(
@@ -127,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   margin: EdgeInsets.all(8),
                   clipBehavior: Clip.antiAlias, // Atur properti clipBehavior
                   child: Image.network(
-                    'https://kepanitiaan.teknokrat.ac.id/wp-content/uploads/2020/05/88057df9-aced-449a-af3b-132da25d03f8-1024x766.jpg',
+                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRM0C9MuiFn3CUnCu_NpCnptwZSgAW8mYZ2Lw&usqp=CAU',
                     fit: BoxFit.contain,
                   ),
                 ),
