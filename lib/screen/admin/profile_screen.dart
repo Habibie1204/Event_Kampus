@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:project_kelas/config/asset.dart';
 import 'package:project_kelas/event/event_pref.dart';
 import 'package:project_kelas/screen/admin/list_panitia.dart';
@@ -49,61 +50,91 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Profile',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 16),
-            TextFormField(
-              controller: nameController,
-              decoration: InputDecoration(labelText: 'Nama'),
-            ),
-            SizedBox(height: 8),
-            TextFormField(
-              controller: npmController,
-              decoration: InputDecoration(labelText: 'Email'),
-            ),
-            SizedBox(height: 8),
-            TextFormField(
-              controller: prodiController,
-              decoration: InputDecoration(labelText: 'Program Studi'),
-            ),
-            SizedBox(height: 8),
-            TextFormField(
-              controller: phoneController,
-              decoration: InputDecoration(labelText: 'Nomor Telepon'),
-            ),
-            SizedBox(height: 8),
-            TextFormField(
-              controller: asalController,
-              decoration: InputDecoration(labelText: 'Asal Sekolah'),
-            ),
-            SizedBox(height: 8),
-            DropdownButtonFormField<String>(
-              value: selectedGender,
-              decoration: InputDecoration(labelText: 'Gender'),
-              items: genderOptions.map((String gender) {
-                return DropdownMenuItem<String>(
-                  value: gender,
-                  child: Text(gender),
-                );
-              }).toList(),
-              onChanged: (String? value) {
-                selectedGender = value;
-              },
-            ),
-            SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: saveProfile,
-              child: Text('Simpan'),
-            ),
-          ],
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context); // Kembali ke halaman sebelumnya
+          },
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Profile',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 16),
+              TextFormField(
+                controller: nameController,
+                decoration: InputDecoration(labelText: 'Nama'),
+              ),
+              SizedBox(height: 8),
+              TextFormField(
+                controller: npmController,
+                decoration: InputDecoration(labelText: 'Email'),
+              ),
+              SizedBox(height: 8),
+              TextFormField(
+                controller: prodiController,
+                decoration: InputDecoration(labelText: 'Program Studi'),
+              ),
+              SizedBox(height: 8),
+              TextFormField(
+                controller: phoneController,
+                decoration: InputDecoration(labelText: 'Nomor Telepon'),
+              ),
+              SizedBox(height: 8),
+              TextFormField(
+                controller: asalController,
+                decoration: InputDecoration(labelText: 'Asal Sekolah'),
+              ),
+              SizedBox(height: 8),
+              DropdownButtonFormField<String>(
+                value: selectedGender,
+                decoration: InputDecoration(labelText: 'Gender'),
+                items: genderOptions.map((String gender) {
+                  return DropdownMenuItem<String>(
+                    value: gender,
+                    child: Text(gender),
+                  );
+                }).toList(),
+                onChanged: (String? value) {
+                  selectedGender = value;
+                },
+              ),
+              SizedBox(height: 16),
+              Row(
+                children: [
+                  ElevatedButton(
+                    onPressed: saveProfile,
+                    child: Text('Simpan'),
+                  ),
+                  SizedBox(width: 16),
+                  ElevatedButton(
+                    onPressed: () async {
+                      FilePickerResult? result =
+                          await FilePicker.platform.pickFiles(
+                        type: FileType.image,
+                      );
+                      if (result != null) {
+                        PlatformFile file = result.files.first;
+                        // Lakukan sesuatu dengan file yang dipilih
+                        // Misalnya, tampilkan nama file yang dipilih
+                        print(file.name);
+                      }
+                    },
+                    child: Text('Choose File'),
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
