@@ -22,7 +22,7 @@ class _DashboardAdminState extends State<DashboardAdmin> {
   String _title = '';
   List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
-    CreateEventScreen(), 
+    CreateEventScreen(),
     ProfilePage(),
   ];
 
@@ -49,15 +49,16 @@ class _DashboardAdminState extends State<DashboardAdmin> {
       backgroundColor: Colors.white,
       appBar: PreferredSize(
         child: AppBar(
+          automaticallyImplyLeading: false,
           elevation: 1,
           toolbarHeight: 60,
-          backgroundColor: Color.fromARGB(255, 255, 255, 255),
+          backgroundColor: Colors.white,
           centerTitle: true,
           title: _title == 'default'
               ? Container(
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Flexible(
                         flex: 1,

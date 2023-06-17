@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project_kelas/config/asset.dart';
 import 'package:project_kelas/event/event_pref.dart';
+import 'package:project_kelas/model/jadwal.dart';
 import 'package:project_kelas/screen/admin/list_user.dart';
 import 'package:project_kelas/screen/admin/list_panitia.dart';
 import 'package:project_kelas/screen/admin/list_peserta.dart';
+import 'package:project_kelas/screen/admin/list_jadwal.dart';
 import 'package:project_kelas/screen/login.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/services.dart';
@@ -81,8 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     IconButton('User', Icons.person, 0),
                     IconButton('Peserta', Icons.people, 1),
                     IconButton('Panitia', Icons.people_alt_outlined, 2),
-                    IconButton('lomba', Icons.event_note, 0),
-                    IconButton('logout', Icons.logout_outlined, 99),
+                    IconButton('Jadwal', Icons.event_note, 3),
                   ],
                 ),
                 SizedBox(
@@ -99,9 +100,14 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Acara Even Pentas Islami"),
+                Text("Acara Event Pentas Islami"),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ListJadwal()),
+                    );
+                  },
                   child: Text("Lihat Semua"),
                 ),
               ],
@@ -130,7 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   clipBehavior: Clip.antiAlias, // Atur properti clipBehavior
                   child: Image.network(
                     'https://iticm.ac.id/wp-content/uploads/2023/01/WhatsApp-Image-2023-01-12-at-16.57.31.jpeg',
-                    fit: BoxFit.contain,
+                    fit: BoxFit.cover,
                   ),
                 ),
                 Container(
@@ -151,7 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   clipBehavior: Clip.antiAlias, // Atur properti clipBehavior
                   child: Image.network(
                     'https://teknofest.teknokrat.ac.id/wp-content/uploads/2023/02/STD_7615-min-scaled.jpg',
-                    fit: BoxFit.contain,
+                    fit: BoxFit.cover,
                   ),
                 ),
                 Container(
@@ -172,7 +178,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   clipBehavior: Clip.antiAlias, // Atur properti clipBehavior
                   child: Image.network(
                     'https://teknofest.teknokrat.ac.id/wp-content/uploads/2023/02/STD_7581-min-scaled.jpg',
-                    fit: BoxFit.contain,
+                    fit: BoxFit.cover,
                   ),
                 ),
               ],
@@ -217,6 +223,8 @@ class IconButton extends StatelessWidget {
     {'title': 'Daftar User', 'view': ListUser()},
     {'title': 'Daftar Peserta', 'view': ListPeserta()},
     {'title': 'Daftar Panitia', 'view': ListPanitia()},
+    {'title': 'Jadwal', 'view': ListJadwal()},
+
     // {'title': 'Daftar Panitia', 'view': ListPanitia()},
   ];
 

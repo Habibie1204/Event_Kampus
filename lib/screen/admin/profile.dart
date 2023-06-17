@@ -13,6 +13,16 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  List<Map> _fragment = [
+    {'title': 'Daftar User', 'view': ListUser()},
+    {'title': 'Daftar Panitia', 'view': ListPanitia()},
+  ];
+
+  void logout() {
+    EventPref.clear();
+    Get.off(Login());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +33,7 @@ class _ProfilePageState extends State<ProfilePage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CircleAvatar(
-                backgroundColor: Colors.red,
+                backgroundColor: Colors.blue,
                 radius: 80,
                 backgroundImage: AssetImage('asset/images/teknokrat.png'),
                 child: Stack(
@@ -36,7 +46,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ProfileScreen()),
+                              builder: (context) => ProfileScreen(),
+                            ),
                           );
                         },
                         icon: Icon(Icons.edit),
@@ -60,7 +71,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           child: Text(
-                            'John Doe',
+                            'Budiman',
                             style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
@@ -81,7 +92,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           child: Text(
-                            'email',
+                            'budiman@gmail.com',
                             style: TextStyle(fontSize: 16),
                           ),
                         ),
@@ -99,7 +110,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           child: Text(
-                            'Asal Sekolah',
+                            'SMAN 1 Bandar Lampung',
                             style: TextStyle(fontSize: 16),
                           ),
                         ),
@@ -117,7 +128,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           child: Text(
-                            'Jenis Lomba',
+                            'Adzan',
                             style: TextStyle(fontSize: 16),
                           ),
                         ),
@@ -135,7 +146,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           child: Text(
-                            'Jenis Kelamin',
+                            'Laki-Laki',
                             style: TextStyle(fontSize: 16),
                           ),
                         ),
@@ -147,9 +158,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       InkWell(
-                        onTap: () {
-                          // Aksi ketika tombol di klik
-                        },
+                        onTap: logout, // Call the logout function
                         child: Container(
                           padding: EdgeInsets.all(8.0),
                           decoration: BoxDecoration(
@@ -167,7 +176,9 @@ class _ProfilePageState extends State<ProfilePage> {
                               Text(
                                 'Logout',
                                 style: TextStyle(
-                                    fontSize: 16, color: Colors.white),
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                ),
                               ),
                             ],
                           ),

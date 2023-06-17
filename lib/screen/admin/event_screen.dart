@@ -4,7 +4,8 @@ import 'package:project_kelas/config/asset.dart';
 import 'package:project_kelas/controller/c_user.dart';
 import 'package:project_kelas/event/event_pref.dart';
 import 'package:project_kelas/model/user.dart';
-import 'package:project_kelas/screen/admin/home_screen.dart';
+import 'package:project_kelas/screen/admin/dashboard_admin.dart';
+import 'package:project_kelas/screen/admin/dashboard_admin.dart';
 import 'package:project_kelas/screen/admin/profile_screen.dart';
 import 'package:project_kelas/screen/admin/event_screen.dart';
 
@@ -31,6 +32,7 @@ class CreateEventScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+         automaticallyImplyLeading: false,
         title: Text('Registration'),
       ),
       body: Padding(

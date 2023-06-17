@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project_kelas/config/asset.dart';
+import 'package:project_kelas/model/jadwal.dart';
 import 'package:project_kelas/model/user.dart';
 import 'package:project_kelas/screen/admin/dashboard_admin.dart';
 import 'package:project_kelas/screen/admin/home_screen.dart';
 import 'package:project_kelas/screen/admin/signup.dart';
+import 'package:project_kelas/screen/admin/list_jadwal.dart';
+
 
 import 'screen/login.dart';
 
@@ -23,11 +26,13 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: '/dashboard',
+      initialRoute: '/',
       routes: {
         '/': (context) => Login(),
         '/dashboard': (context) => DashboardAdmin(),
         '/signup': (context) => SignUp(),
+        '/jadwal': (context) => ListJadwal(),
+
 
         // '/signup' : (context) => signup(),
       },
