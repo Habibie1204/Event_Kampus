@@ -58,9 +58,11 @@ class _LoginState extends State<Login> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
+           
+              crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              height: 500,
+               alignment: Alignment.center,
               decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topRight,
@@ -68,12 +70,13 @@ class _LoginState extends State<Login> {
                     colors: [
                       Color.fromARGB(255, 68, 182, 231),
                       Color.fromARGB(255, 3, 54, 131),
+                      
                     ],
                   ),
                   borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(40),
                       bottomRight: Radius.circular(40))),
-              alignment: Alignment.bottomCenter,
+             
               padding: EdgeInsets.only(bottom: 20, top: 90),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,

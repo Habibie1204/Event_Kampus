@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: '/',
+      initialRoute: '/dashboard',
       routes: {
         '/': (context) => Login(),
         '/dashboard': (context) => DashboardAdmin(),

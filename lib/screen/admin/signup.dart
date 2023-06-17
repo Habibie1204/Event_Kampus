@@ -50,7 +50,7 @@ class _LoginState extends State<SignUp> {
       print(error);
     }
   }
-
+  
   @override
   void initState() {
     super.initState();
@@ -66,7 +66,7 @@ class _LoginState extends State<SignUp> {
         child: Column(
           children: [
             Container(
-              height: 420,
+              
               decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topRight,
@@ -106,10 +106,10 @@ class _LoginState extends State<SignUp> {
                         translation: Offset(0.0, -0.02),
                         child: ClipOval(
                           child: Image.network(
-                            'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/UNIVERSITASTEKNOKRAT.png/1200px-UNIVERSITASTEKNOKRAT.png',
+                            'https://static.vecteezy.com/system/resources/previews/011/414/253/original/elegant-arabian-banner-with-white-background-and-mosque-free-vector.jpg',
                             fit: BoxFit.cover,
-                            width: 170, // Atur lebar gambar
-                            height: 170,
+                            width: 200, // Atur lebar gambar
+                            height: 200,
                           ),
                         ),
                       ),
@@ -297,7 +297,6 @@ class _LoginState extends State<SignUp> {
                                 signUp();
                                 _controllerUsername.clear();
                                 _controllerPass.clear();
-                                print("kepencet");
                               },
                               child: Text(
                                 'SIGN UP',
@@ -326,7 +325,7 @@ class _LoginState extends State<SignUp> {
                                     builder: (context) => Login()),
                               );
                             },
-                            child: Text("Sign Up"),
+                            child: Text("Sign In"),
                           ),
                         ],
                       ),

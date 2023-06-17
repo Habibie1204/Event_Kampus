@@ -308,4 +308,87 @@ static Future<User?> register(String username, String pass) async {
 
     return listPeserta;
   }
+
+  static Future<String> AddPeserta(
+    String nama,
+    String email,
+    String asal_sekolah,
+    String daftar_lomba,
+    String gender,
+  ) async {
+    String reason;
+
+    try {
+      var response = await http.post(Uri.parse(Api.addPeserta), body: {
+        'nama': nama,
+        'email': email,
+        'asal_sekolah': asal_sekolah,
+        'daftar_lomba': daftar_lomba,
+        'gender': gender,
+      });
+
+      if (response.statusCode == 200) {
+        var responBody = jsonDecode(response.body);
+        if (responBody['success']) {
+          reason = 'Add Peserta Berhasil';
+        } else {
+          reason = responBody['reason'];
+        }
+      } else {
+        reason = "Request Gagal";
+      }
+    } catch (e) {
+      print(e);
+      reason = e.toString();
+    }
+
+    return reason;
+  }
+
+  static Future<void> UpdatePeserta(
+    String nama,
+    String email,
+    String asal_sekolah,
+    String daftar_lomba,
+    String gender,
+  ) async {
+    try {
+      var response = await http.post(Uri.parse(Api.updatePeserta), body: {
+        'nama': nama,
+        'email': email,
+        'asal_sekolah': asal_sekolah,
+        'daftar_lomba': daftar_lomba,
+        'gender': gender,
+      });
+
+      if (response.statusCode == 200) {
+        var responBody = jsonDecode(response.body);
+        if (responBody['success']) {
+          Info.snackbar('Berhasil Update Panitia');
+        } else {
+          Info.snackbar('Gagal Update Panitia');
+        }
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  static Future<void> deletePeserta(String nama) async {
+    try {
+      var response =
+          await http.post(Uri.parse(Api.deletePeserta), body: {'nama': nama});
+
+      if (response.statusCode == 200) {
+        var responBody = jsonDecode(response.body);
+        if (responBody['success']) {
+          Info.snackbar('Berhasil Delete Peserta');
+        } else {
+          Info.snackbar('Gagal Delete Peserta');
+        }
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 }
